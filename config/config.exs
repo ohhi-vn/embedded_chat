@@ -67,6 +67,10 @@ config :chat_service, ChatService.Repo,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
 
+config :chat_service, :pubsub, chat_room: ChatService.PubSub
+
+config :exqlite, default_chunk_size: 100
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
