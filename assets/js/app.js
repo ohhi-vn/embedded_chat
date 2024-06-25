@@ -33,6 +33,41 @@ window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
+// Get the full URL
+const url = new URL(window.location.href);
+
+// Extract the query parameters
+const params = new URLSearchParams(url.search);
+
+// Get the user_id and game_id
+const userId = params.get('user_id');
+const gameId = params.get('game_id');
+
+console.log("User ID " + userId, " join game:" + gameId);
+
+// Now that you are connected, you can join channels with a topic:
+let channel = liveSocket.channel("game:" + gameId, {params: {user_id: userId}})
+
+let chatInput = document.querySelector("#chat-input")
+
+let leaveButton = document.querySelector("#user-leave-room")
+
+chatInput.addEventListener("keypress", event => {
+    if(event.key === 'Enter' && chatInput.value != ""){
+        channel.push("new_msg", {body: chatInput.value, user_id: userId})
+      chatInput.value = ""
+    }
+  })
+
+leaveButton.addEventListener("click", leaveRoom);
+function leaveRoom() {
+    channel.push("user_leave_room", {user_id: userId})
+}
+
+channel.join()
+  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join", resp) })
+
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
