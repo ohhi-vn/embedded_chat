@@ -109,7 +109,7 @@ defmodule ChatServiceWeb.ChatRoomLiveView do
     if (user_id == current_user) do
       {:noreply,
        redirect(socket,
-                external: "http://localhost:4005/user/my_account?new_user=yes")}
+                external: "http://localhost:4000")}
     else
       update_users(old_all_users -- [user_id])
       {:noreply, socket}
