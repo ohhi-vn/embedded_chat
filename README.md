@@ -4,38 +4,38 @@ To start your Phoenix server:
 
   * Run `mix deps.get` to install dependencies
   * Run `mix ecto.create` to create the storage for the given repository.
-  * mix `ecto.gen.migration` to generates a new migration for the repo.
+  * Run `mix ecto.gen.migration *name of file*` to generates a new migration for the repo.
   * Run `mix ecto.migrate` to runs the repository migratio
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-Now you can visit [`localhost:4006`](http://localhost:4000) from your browser.
+Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&game_id=game_1)`](http://localhost:4000/chat_room?user_id=john&game_id=game_1) from your browser.
 
-+ `http://localhost:4006/chat_room/1/john`
++ `http://localhost:4000/chat_room?user_id=john&game_id=game_1`
 
-+ `1` is room and `john` is user
++ `game_1` is room and `john` is user
 
 ## Database:
 
 ![image info](priv/static/images/database_chat_room.png)
 
 ## Model
-apps/chat_service/lib/chat_service/room
+lib/chat_service/room
 => model chat room
 
-apps/chat_service/priv/repo/migrations/*_create_room_table.exs
+priv/repo/migrations/*_create_room_table.exs
 => Migrations are used to modify your database schema over time.
 
 ## View
 
 ## Controller
 
-+ apps/chat_service/lib/chat_service_web/controllers/room_channels/chat_room_live_view.ex
++ lib/chat_service_web/controllers/room_channels/chat_room_live_view.ex
  => Handle main live view, handle user joins room and send message, add user by clicking button
 
- + apps/chat_service/lib/chat_service_web/controllers/room_channels/messages_component.ex
+ + lib/chat_service_web/controllers/room_channels/messages_component.ex
  => Use live component for update history message
 
- + apps/chat_service/lib/chat_service_web/controllers/room_channels/user_online_component.ex
+ + lib/chat_service_web/controllers/room_channels/user_online_component.ex
 => Use live component for storing user in room
 
 ## Channel
