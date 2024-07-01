@@ -5,7 +5,7 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     ChatService.Repo.insert!(%ChatService.SomeSchema{})
+#     EmbeddedChat.Repo.insert!(%EmbeddedChat.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.

@@ -1,0 +1,40 @@
+<div class="container mx-auto py-10" >
+    <div class="grid grid-cols-3 gap-4 ">
+            <div class="col-span-1 bg-indigo-100 text-2xl h-24">
+            <p class="flex py-7 px-4 items-center justify-center"> <%= @current_user %> </p>
+        </div>
+        <div class="col-span-1 bg-indigo-100 h-24 text-2xl flex items-center justify-center ">
+            <button id="user-leave-room"
+                class="rounded-full bg-blue-50 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ">
+                Leave room
+            </button>
+        </div>
+        <.form :let={f} for={@changeset} phx-submit="add_user_btn">
+            <div class="col-span-1 bg-indigo-100 h-24 text-2xl px-4">
+                <p> Add user to room </p>
+
+                <div class="flex items-center border-b border-teal-500 py-1">
+                    <.input field={f[:user_id]}
+                        class="mr-10 appearance-none bg-transparent border-none w-full text-gray-700 leading-tight focus:outline-none"
+                        placeholder="User name" type="text" aria-label="Full name">
+                    </.input>
+                    <div>
+                        <.input field={f[:game_id]} value={@game_id} type="hidden"/>
+                    </div>
+                    <.button
+                        class="rounded-ful w-40 ml-10 bg-green-400 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded items-center">
+                        Add
+                    </.button>
+                </div>
+
+            </div>
+        </.form>
+        <div class="col-span-2 bg-indigo-100 h-auto">
+            <.live_component module={EmbeddedChatWeb.MessagesComponent} id="messages" message={@message} />
+        </div>
+        <div class="col-span-1 bg-indigo-100 h-auto px-4">
+            <.live_component module={EmbeddedChatWeb.UserOnlineComponent} id="user_online"
+                users_online={@users_online} />
+        </div>
+    </div>
+</div>

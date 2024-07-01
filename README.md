@@ -1,25 +1,33 @@
-# ChatService (LiveView)
+# Embedded Chat
+
+## Intro
+
+This is an embedded chat support to integrating an Phoenix app or can run standalone.
+Support persistent storage for message to database (SQlite & Postgres).
+
+## Start Guide
 
 To start your Phoenix server:
 
-  * Run `mix deps.get` to install dependencies
-  * Run `mix ecto.create` to create the storage for the given repository.
-  * Run `mix ecto.gen.migration *name of file*` to generates a new migration for the repo.
-  * Run `mix ecto.migrate` to runs the repository migratio
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+* Run `mix deps.get` to install dependencies
+* Run `mix ecto.create` to create the storage for the given repository.
+* Run `mix ecto.gen.migration *name of file*` to generates a new migration for the repo.
+* Run `mix ecto.migrate` to runs the repository migratio
+* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&game_id=game_1)`](http://localhost:4000/chat_room?user_id=john&game_id=game_1) from your browser.
 
-+ `http://localhost:4000/chat_room?user_id=john&game_id=game_1`
+* `http://localhost:4000/chat_room?user_id=john&game_id=game_1`
 
-+ `game_1` is room and `john` is user
+* `game_1` is room and `john` is user
 
-## Database:
+## Database
 
 ![image info](priv/static/images/database_chat_room.png)
 
 ## Model
-lib/chat_service/room
+
+lib/embedded_chat/room
 => model chat room
 
 priv/repo/migrations/*_create_room_table.exs
@@ -29,23 +37,22 @@ priv/repo/migrations/*_create_room_table.exs
 
 ## Controller
 
-+ lib/chat_service_web/controllers/room_channels/chat_room_live_view.ex
+* lib/embedded_chat_web/controllers/room_channels/chat_room_live_view.ex
  => Handle main live view, handle user joins room and send message, add user by clicking button
 
- + lib/chat_service_web/controllers/room_channels/messages_component.ex
+* lib/embedded_chat_web/controllers/room_channels/messages_component.ex
  => Use live component for update history message
 
- + lib/chat_service_web/controllers/room_channels/user_online_component.ex
+* lib/embedded_chat_web/controllers/room_channels/user_online_component.ex
 => Use live component for storing user in room
 
 ## Channel
-
 
 ![image info](priv/static/images/chat_room_service.png)
 
 ## Use case
 
-# First user joins room
+## First user joins room
 
 Flow:
 
@@ -67,7 +74,7 @@ sequenceDiagram
     chat_room_live_view->>user_online_component: do notthing
 ```
 
-# Second user joins room
+## Second user joins room
 
 Flow:
 
@@ -96,7 +103,7 @@ sequenceDiagram
     end
 ```
 
-# User sends messages
+## User sends messages
 
 Flow:
 
@@ -124,7 +131,7 @@ sequenceDiagram
     end
 ```
 
-# Add user to room
+## Add user to room
 
 Flow:
 
@@ -159,7 +166,7 @@ sequenceDiagram
     end
 ```
 
-# User leaves room
+## User leaves room
 
 Flow:
 

@@ -7,18 +7,18 @@
 # General application configuration
 import Config
 
-config :chat_service,
-  ecto_repos: [ChatService.Repo]
+config :embedded_chat,
+  ecto_repos: [EmbeddedChat.Repo]
 
 # Configures the endpoint
-config :chat_service, ChatServiceWeb.Endpoint,
+config :embedded_chat, EmbeddedChatWeb.Endpoint,
   adapter: Bandit.PhoenixAdapter,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: ChatServiceWeb.ErrorHTML, json: ChatServiceWeb.ErrorJSON],
+    formats: [html: EmbeddedChatWeb.ErrorHTML, json: EmbeddedChatWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: ChatService.PubSub,
+  pubsub_server: EmbeddedChat.PubSub,
   live_view: [signing_salt: "M/0Csuoe"]
 
 # Configures the mailer
@@ -28,7 +28,7 @@ config :chat_service, ChatServiceWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :chat_service, ChatService.Mailer, adapter: Swoosh.Adapters.Local
+config :embedded_chat, EmbeddedChat.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -61,13 +61,13 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Configure your database
-config :chat_service, ChatService.Repo,
-  database: Path.expand("../chat_service_dev.db", Path.dirname(__ENV__.file)),
+config :embedded_chat, EmbeddedChat.Repo,
+  database: Path.expand("../embedded_chat_dev.db", Path.dirname(__ENV__.file)),
   pool_size: 5,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
 
-config :chat_service, :pubsub, chat_room: ChatService.PubSub
+config :embedded_chat, :pubsub, chat_room: EmbeddedChat.PubSub
 
 config :exqlite, default_chunk_size: 100
 

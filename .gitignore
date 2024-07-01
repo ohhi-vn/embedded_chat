@@ -23,7 +23,7 @@ erl_crash.dump
 /tmp/
 
 # Ignore package tarball (built via "mix hex.build").
-chat_service-*.tar
+embedded_chat-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
@@ -37,6 +37,6 @@ npm-debug.log
 
 mix.lock
 
-chat_service_dev.db
-chat_service_dev.db-shm
-chat_service_dev.db-wal
+embedded_chat_dev.db
+embedded_chat_dev.db-shm
+embedded_chat_dev.db-wal

@@ -1,4 +1,4 @@
-defmodule ChatService.Repo.Migrations.CreateRoomTable do
+defmodule EmbeddedChat.Repo.Migrations.CreateRoomTable do
   use Ecto.Migration
 
   def change do
