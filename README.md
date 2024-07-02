@@ -7,13 +7,19 @@ Support persistent storage for message to database (SQlite & Postgres).
 
 ## Start Guide
 
-To start your Phoenix server:
+Run setup script before start:
 
-* Run `mix deps.get` to install dependencies
-* Run `mix ecto.create` to create the storage for the given repository.
-* Run `mix ecto.gen.migration *name of file*` to generates a new migration for the repo.
-* Run `mix ecto.migrate` to runs the repository migratio
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+```bash
+mix deps.get
+mix ecto.create
+mix ecto.migrate
+```
+
+Start standalone app:
+
+```bash
+mix phx.server
+```
 
 Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&game_id=game_1)`](http://localhost:4000/chat_room?user_id=john&game_id=game_1) from your browser.
 

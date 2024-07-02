@@ -14,6 +14,8 @@ defmodule EmbeddedChat.Application do
       EmbeddedChat.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: EmbeddedChat.PubSub},
+      # Start the InternalPubSub system
+      {Phoenix.PubSub, name: EmbeddedChat.InternalPubSub},
       # Start Finch
       {Finch, name: EmbeddedChat.Finch},
       # Start the Endpoint (http/https)

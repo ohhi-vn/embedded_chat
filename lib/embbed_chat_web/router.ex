@@ -19,7 +19,12 @@ defmodule EmbeddedChatWeb.Router do
 
     get "/", PageController, :home
     live "/chat_room", ChatRoomLiveView
+  end
 
+  scope "/admin", EmbeddedChatWeb do
+    pipe_through :browser
+
+    live "/", AdminLiveView
   end
 
   # Other scopes may use custom stacks.

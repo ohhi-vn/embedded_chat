@@ -20,7 +20,7 @@ defmodule EmbeddedChatWeb.ChatRoomLiveView do
           {Map.get(params, "game_id", :not_found),
            Map.get(params, "user_id", :not_found)}
         _ ->
-          ## Use session when this live view is embeded in another liveview
+          # Use session when this live view is embeded in another liveview
           {Map.get(session, "game_id", :not_found),
            Map.get(session, "user_id", :not_found)}
       end
