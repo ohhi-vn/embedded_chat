@@ -8,9 +8,9 @@ To start your Phoenix server:
   * Run `mix ecto.migrate` to runs the repository migratio
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&game_id=game_1)`](http://localhost:4000/chat_room?user_id=john&game_id=game_1) from your browser.
+Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&channel_id=game_1)`](http://localhost:4000/chat_room?user_id=john&channel_id=game_1) from your browser.
 
-+ `http://localhost:4000/chat_room?user_id=john&game_id=game_1`
++ `http://localhost:4000/chat_room?user_id=john&channel_id=game_1`
 
 + `game_1` is room and `john` is user
 
@@ -57,12 +57,12 @@ sequenceDiagram
     participant user_online_component
     participant messages_component
     User1->>chat_room_live_view: Mount page (1)
-    Note right of chat_room_live_view: PubSub.subscribe(topic::game_id)
+    Note right of chat_room_live_view: PubSub.subscribe(topic::channel_id)
     chat_room_live_view->>user_online_component: update all users in room ([users]) (2)
     chat_room_live_view->>messages_component: update all history message of room ([user, message]) (3)
     Note right of User1: app.js
     User1->>game_channel: User1 joins channel (game)
-    Note right of game_channel: PubSub.broadcast(topic::game_id)
+    Note right of game_channel: PubSub.broadcast(topic::channel_id)
     game_channel->>chat_room_live_view: PubSub sends join_room
     chat_room_live_view->>user_online_component: do notthing
 ```
@@ -86,7 +86,7 @@ sequenceDiagram
     Note right of game_channel: Same as 1, 2, 3 step of first user joins room
     Note right of User2: app.js
     User2->>game_channel: User2 joins channel (game)
-    Note right of game_channel: PubSub.broadcast(topic::game_id)
+    Note right of game_channel: PubSub.broadcast(topic::channel_id)
     par Parallelly
     game_channel->>chat_room_live_view (2): PubSub sends join_room
     chat_room_live_view (2)->>user_online_component (2): do notthing
@@ -114,7 +114,7 @@ sequenceDiagram
     end
     Note right of User2: app.js
     User2->>game_channel: User sends message via channel (game)
-    Note right of game_channel: PubSub.broadcast(topic::game_id)
+    Note right of game_channel: PubSub.broadcast(topic::channel_id)
     par Parallelly
     game_channel->>chat_room_live_view (2): PubSub sends send_msg
     chat_room_live_view (2)->>messages_component (2): update all messages
@@ -146,7 +146,7 @@ sequenceDiagram
     Note right of User1: phx-submit event
     User1->>chat_room_live_view (1): User adds another user to room
     Note over chat_room_live_view (1): handle_event
-    Note right of chat_room_live_view (1): PubSub.broadcast(topic::game_id)
+    Note right of chat_room_live_view (1): PubSub.broadcast(topic::channel_id)
     par Parallelly
     chat_room_live_view (1)->>chat_room_live_view (1): PubSub sends add users
     chat_room_live_view (1)->>user_online_component (1): update all users in room
@@ -180,7 +180,7 @@ sequenceDiagram
     end
     User1->>game_channel (1): User leaves room
     Note over game_channel (1): handle_in
-    Note right of game_channel (1): PubSub.broadcast (topic::game_id)
+    Note right of game_channel (1): PubSub.broadcast (topic::channel_id)
     par Parallelly
     game_channel (1) ->> chat_room_live_view (1): PubSub sends user leaves room
     Note over chat_room_live_view (1): handle_info

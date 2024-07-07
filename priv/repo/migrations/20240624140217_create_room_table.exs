@@ -9,7 +9,7 @@ defmodule ChatService.Repo.Migrations.CreateRoomTable do
 
     create table(:room, primary_key: false) do
       add :room_id, :id, primary_key: true
-      add :game_id, :string, null: false
+      add :channel_id, :string, null: false
 
       timestamps()
     end
