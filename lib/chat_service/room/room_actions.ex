@@ -82,11 +82,11 @@ defmodule ChatService.Room.RoomActions do
 
 
   @doc """
-  Check whether game_id is added into RoomInfo or not
+  Check whether channel_id is added into RoomInfo or not
   """
-  @spec is_game_exist_in_room(String.t()) :: boolean()
-  def is_game_exist_in_room(game_id) do
-    from(r in RoomInfo, where: r.game_id == ^game_id)
+  @spec is_channel_exist_in_room(String.t()) :: boolean()
+  def is_channel_exist_in_room(channel_id) do
+    from(r in RoomInfo, where: r.channel_id == ^channel_id)
     |> Repo.exists?()
   end
 
@@ -122,11 +122,11 @@ defmodule ChatService.Room.RoomActions do
   end
 
   @doc """
-  Get room_id of chat room base on game_id
+  Get room_id of chat room base on channel_id
   """
-  @spec get_room_id_of_game(String.t()) :: list()
-  def get_room_id_of_game(game_id) do
-    from(c in RoomInfo, where: c.game_id == ^game_id, select: c.room_id)
+  @spec get_room_id_of_channel(String.t()) :: list()
+  def get_room_id_of_channel(channel_id) do
+    from(c in RoomInfo, where: c.channel_id == ^channel_id, select: c.room_id)
     |> Repo.all()
   end
 

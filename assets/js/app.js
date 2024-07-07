@@ -39,14 +39,14 @@ const url = new URL(window.location.href);
 // Extract the query parameters
 const params = new URLSearchParams(url.search);
 
-// Get the user_id and game_id
+// Get the user_id and channel_id
 const userId = params.get('user_id');
-const gameId = params.get('game_id');
+const channelId = params.get('channel_id');
 
-console.log("User ID " + userId, " join game:" + gameId);
+console.log("User ID " + userId, " join channel:" + channelId);
 
 // Now that you are connected, you can join channels with a topic:
-let channel = liveSocket.channel("game:" + gameId, {params: {user_id: userId}})
+let channel = liveSocket.channel("channel:" + channelId, {params: {user_id: userId}})
 
 let chatInput = document.querySelector("#chat-input")
 

@@ -9,7 +9,7 @@ defmodule ChatServiceWeb.UserSocket do
   ## Channels
 
   channel "lv:*", Phoenix.LiveView.Channel
-  channel "game:*", ChatServiceWeb.GameChannel
+  channel "channel:*", ChatServiceWeb.GameChannel
 
   @impl true
   def connect(_params, socket, _connect_info) do
