@@ -15,7 +15,7 @@ defmodule EmbeddedChat.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: EmbeddedChat.PubSub},
       # Start the InternalPubSub system
-      {Phoenix.PubSub, name: EmbeddedChat.InternalPubSub},
+      Supervisor.child_spec({Phoenix.PubSub, name: EmbeddedChat.InternalPubSub}, id: :internal_pubsub),
       # Start Finch
       {Finch, name: EmbeddedChat.Finch},
       # Start the Endpoint (http/https)
