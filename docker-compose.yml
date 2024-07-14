@@ -1,3 +1,4 @@
+version: '2'
 services:
   elixir:
     build:
@@ -5,10 +6,11 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file: prod.env
+    platform: linux/amd64
     ports:
       - "4433:443"
       - "8080:8080"
-    container_name: chat_service
+    container_name: chat_service_v2
     volumes:
       - ./data:/data
       - ./priv/cert:/cert

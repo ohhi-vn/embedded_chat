@@ -26,15 +26,11 @@ if config_env() == :prod do
   db_file = System.get_env("DATABASE_FILE") || raise "missing DATABASE_FILE environment variable"
   host = System.get_env("PHX_HOST") || raise "missing PHX_HOST environment variable"
   port = String.to_integer(System.get_env("PHX_HTTP_PORT") || "8080")
-
-  IO.puts("Runtime configuration db_file_database: #{Path.expand("../#{db_file}", Path.dirname(__ENV__.file))}")
-  IO.puts("Runtime configuration db_file: #{db_file}")
-
   config :chat_service, ChatService.Repo,
     # ssl: true,
     database: Path.expand(db_file),
     stacktrace: true,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    pool_size: 15,
     socket_options: maybe_ipv6
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
@@ -110,21 +106,9 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
-  database1 = Path.expand("../chat_service_dev.db")
-  database2 = Path.expand("../chat_service_dev.db", Path.dirname(__ENV__.file))
-  database3 = Path.dirname(__ENV__.file)
-
-  check = :os.cmd('ls chat_service_dev.db')
-  check2 = :os.cmd('ls ../chat_service_dev.db')
-
-  IO.puts("Runtime configuration loaded database1, env: #{database1}")
-  IO.puts("Runtime configuration loaded database2, env: #{database2}")
-  IO.puts("Runtime configuration loaded database3, env: #{database3}")
-  IO.puts("Runtime configuration loaded check, env: #{inspect(check)}")
-  IO.puts("Runtime configuration loaded check2, env: #{inspect(check2)}")
-
 
   IO.puts("Runtime configuration loaded host, env: #{host}")
+  IO.puts("Runtime configuration loaded db, env: #{Path.expand(db_file)}")
   IO.puts("Runtime configuration loaded port, env: #{port}")
   IO.puts("Runtime configuration loaded, env: #{config_env()}")
 
