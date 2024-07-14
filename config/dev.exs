@@ -62,10 +62,14 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+db_file = System.get_env("DATABASE_FILE") || raise "missing DATABASE_FILE environment variable"
+
+IO.puts("dev configuration loaded db, env: #{db_file}")
+
 # Configure your database
 config :chat_service, ChatService.Repo,
-  database: Path.expand("./data/chat_service_dev.db"),
-  pool_size: 5,
+  database: Path.expand(db_file),
+  pool_size: 15,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
 
