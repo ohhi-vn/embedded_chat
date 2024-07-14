@@ -9,7 +9,7 @@ import Config
 config :chat_service, ChatServiceWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {127, 0, 0, 1}, port: 8080],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -61,6 +61,13 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+# Configure your database
+config :chat_service, ChatService.Repo,
+  database: Path.expand("./data/chat_service_dev.db"),
+  pool_size: 5,
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

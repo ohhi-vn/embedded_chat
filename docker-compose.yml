@@ -1,0 +1,15 @@
+services:
+  elixir:
+    build:
+      network: host
+      context: .
+      dockerfile: Dockerfile
+    env_file: prod.env
+    ports:
+      - "4433:443"
+      - "8080:8080"
+    container_name: chat_service
+    volumes:
+      - ./data:/data
+      - ./priv/cert:/cert
+
