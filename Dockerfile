@@ -27,17 +27,30 @@ RUN apt-get update -y && apt-get install -y build-essential git \
 # prepare build dir
 WORKDIR /app
 
+# Copy environment file and set environment variables
 # install hex + rebar
 RUN mix local.hex --force && \
     mix local.rebar --force
 
 # set build ENV
 ENV MIX_ENV="prod"
+ENV ERL_FLAGS="+JPperf true"
+
+ENV SECRET_KEY_BASE=4qlua0cPSKUF08Vn7kcETe7ikxYGuS0OLq8pcRXhItJ1Rd+XvFxNMIskzoe5AqUz
+ENV HOST=chat.vn
+ENV PHX_HOST=chat.vn
+ENV PHX_HTTP_PORT=8080
+ENV PHX_HTTPS_PORT=443
+ENV DATABASE_FILE="/data/chat_service_dev.db"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
-RUN mix deps.get --only $MIX_ENV
+
+RUN mix deps.clean --all
+RUN HEX_HTTP_CONCURRENCY=1 HEX_HTTP_TIMEOUT=120  mix deps.get --only $MIX_ENV
 RUN mkdir config
+
+EXPOSE 443 8080
 
 # copy compile-time config files before we compile dependencies
 # to ensure any relevant config change will trigger the dependencies
@@ -48,6 +61,8 @@ RUN mix deps.compile
 COPY priv priv
 
 COPY lib lib
+
+COPY entrypoint.sh /app/entrypoint.sh
 
 COPY assets assets
 
@@ -61,6 +76,14 @@ RUN mix compile
 COPY config/runtime.exs config/
 
 COPY rel rel
+
+RUN mix ecto.drop
+RUN mix ecto.create
+
+# RUN mix ecto.gen.migration "create_room_table_v1"
+# RUN ls priv/repo/migrations
+RUN mix ecto.migrate
+
 RUN mix release
 
 # start a new build stage so that the final image will only contain
@@ -93,5 +116,6 @@ USER nobody
 # advised to add an init process such as tini via `apt-get install`
 # above and adding an entrypoint. See https://github.com/krallin/tini for details
 # ENTRYPOINT ["/tini", "--"]
+ENV PHX_SERVER=true
 
-CMD ["/app/bin/server"]
+CMD ["/app/bin/chat_service", "start"]

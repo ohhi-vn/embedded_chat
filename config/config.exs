@@ -11,9 +11,12 @@ config :chat_service,
   ecto_repos: [ChatService.Repo]
 
 # Configures the endpoint
+
+host = System.get_env("PHX_HOST") || raise "missing PHX_HOST environment variable"
+
 config :chat_service, ChatServiceWeb.Endpoint,
   adapter: Bandit.PhoenixAdapter,
-  url: [host: "localhost"],
+  url: [host: host],
   render_errors: [
     formats: [html: ChatServiceWeb.ErrorHTML, json: ChatServiceWeb.ErrorJSON],
     layout: false
@@ -60,12 +63,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Configure your database
-config :chat_service, ChatService.Repo,
-  database: Path.expand("../chat_service_dev.db", Path.dirname(__ENV__.file)),
-  pool_size: 5,
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true
 
 config :chat_service, :pubsub, chat_room: ChatService.PubSub
 

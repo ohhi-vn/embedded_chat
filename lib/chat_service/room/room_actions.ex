@@ -10,6 +10,11 @@ defmodule ChatService.Room.RoomActions do
   alias ChatService.Repo
   import Ecto.Query
 
+  require Logger
+  defmacro f_name() do
+      elem(__CALLER__.function, 0)
+  end
+
   @doc """
   Add RoomInfo entry with game id.
   """
