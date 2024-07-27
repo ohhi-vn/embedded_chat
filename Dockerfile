@@ -62,8 +62,6 @@ COPY priv priv
 
 COPY lib lib
 
-COPY entrypoint.sh /app/entrypoint.sh
-
 COPY assets assets
 
 # compile assets

@@ -107,9 +107,7 @@ defmodule ChatServiceWeb.ChatRoomLiveView do
     # Only redirect to other page for current user client, other clients will
     # stay at current page and will not redirect to other page.
     if (user_id == current_user) do
-      {:noreply,
-       redirect(socket,
-                external: "http://localhost:4000")}
+      {:noreply, push_redirect(socket, to: "/")}
     else
       update_users(old_all_users -- [user_id])
       {:noreply, socket}

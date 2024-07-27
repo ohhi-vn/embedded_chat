@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file: prod.env
+    environment:
+      - DATABASE_FILE=/data/chat_service_dev.db
     platform: linux/amd64
     ports:
       - "4433:443"

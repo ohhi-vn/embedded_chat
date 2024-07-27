@@ -1,13 +1,6 @@
 defmodule ChatServiceWeb.UserSocket do
   use Phoenix.LiveView.Socket
 
-  # A Socket handler
-  #
-  # It's possible to control the websocket connection and
-  # assign values that can be accessed by your channel topics.
-
-  ## Channels
-
   channel "lv:*", Phoenix.LiveView.Channel
   channel "channel:*", ChatServiceWeb.GameChannel
 

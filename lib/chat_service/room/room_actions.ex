@@ -16,7 +16,7 @@ defmodule ChatService.Room.RoomActions do
   end
 
   @doc """
-  Add RoomInfo entry with game id.
+  Add RoomInfo entry with channel id.
   """
   @spec add_room(map()) ::
     {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}

@@ -47,8 +47,6 @@ priv/repo/migrations/*_create_room_table.exs
 
 # First user joins room
 
-Flow:
-
 ```mermaid
 sequenceDiagram
     actor User1
@@ -61,15 +59,13 @@ sequenceDiagram
     chat_room_live_view->>user_online_component: update all users in room ([users]) (2)
     chat_room_live_view->>messages_component: update all history message of room ([user, message]) (3)
     Note right of User1: app.js
-    User1->>game_channel: User1 joins channel (game)
+    User1->>game_channel: User1 joins channel
     Note right of game_channel: PubSub.broadcast(topic::channel_id)
     game_channel->>chat_room_live_view: PubSub sends join_room
     chat_room_live_view->>user_online_component: do notthing
 ```
 
 # Second user joins room
-
-Flow:
 
 ```mermaid
 sequenceDiagram
@@ -85,7 +81,7 @@ sequenceDiagram
     end
     Note right of game_channel: Same as 1, 2, 3 step of first user joins room
     Note right of User2: app.js
-    User2->>game_channel: User2 joins channel (game)
+    User2->>game_channel: User2 joins channel
     Note right of game_channel: PubSub.broadcast(topic::channel_id)
     par Parallelly
     game_channel->>chat_room_live_view (2): PubSub sends join_room
@@ -97,8 +93,6 @@ sequenceDiagram
 ```
 
 # User sends messages
-
-Flow:
 
 ```mermaid
 sequenceDiagram
@@ -113,7 +107,7 @@ sequenceDiagram
     participant messages_component (1)
     end
     Note right of User2: app.js
-    User2->>game_channel: User sends message via channel (game)
+    User2->>game_channel: User sends message via channel
     Note right of game_channel: PubSub.broadcast(topic::channel_id)
     par Parallelly
     game_channel->>chat_room_live_view (2): PubSub sends send_msg
@@ -125,8 +119,6 @@ sequenceDiagram
 ```
 
 # Add user to room
-
-Flow:
 
 ```mermaid
 sequenceDiagram
@@ -160,8 +152,6 @@ sequenceDiagram
 ```
 
 # User leaves room
-
-Flow:
 
 ```mermaid
 sequenceDiagram
