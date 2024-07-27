@@ -40,3 +40,9 @@ mix.lock
 chat_service_dev.db
 chat_service_dev.db-shm
 chat_service_dev.db-wal
+
+*.tar
+
+*.DS_Store
+
+.git

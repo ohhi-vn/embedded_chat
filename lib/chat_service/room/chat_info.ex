@@ -2,7 +2,6 @@ defmodule ChatService.Room.ChatInfo do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # @primary_key {:chat_id, :id, autogenerate: true}
   schema "chat" do
     field :message, :string
     field :room_id, :integer
@@ -19,7 +18,6 @@ defmodule ChatService.Room.ChatInfo do
     chat
     |> cast(params, [:message, :user_id, :room_id])
     |> validate_required([:message, :user_id, :room_id])
-    # |> unique_constraint(:chat_id)
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:room_id)
   end
