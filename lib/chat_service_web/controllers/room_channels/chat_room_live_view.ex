@@ -87,7 +87,7 @@ defmodule ChatServiceWeb.ChatRoomLiveView do
       end
 
     update_users(new_all_users)
-    {:noreply, socket}
+    {:noreply, assign(socket, :users_online, all_users)}
   end
 
   @impl true

@@ -106,8 +106,8 @@ sequenceDiagram
     participant chat_room_live_view (1)
     participant messages_component (1)
     end
-    Note right of User2: app.js
     User2->>game_channel: User sends message via channel
+    Note over game_channel : handle_in
     Note right of game_channel: PubSub.broadcast(topic::channel_id)
     par Parallelly
     game_channel->>chat_room_live_view (2): PubSub sends send_msg
