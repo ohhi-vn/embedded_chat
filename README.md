@@ -8,9 +8,9 @@ To start your Phoenix server:
   * Run `mix ecto.migrate` to runs the repository migratio
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-Now you can visit [`[localhost:4000](http://localhost:4000/chat_room?user_id=john&channel_id=game_1)`](http://localhost:4000/chat_room?user_id=john&channel_id=game_1) from your browser.
+Now you can visit [chat_service page](http://localhost:8080/chat_room?user_id=john&channel_id=game_1) from your browser.
 
-+ `http://localhost:4000/chat_room?user_id=john&channel_id=game_1`
++ `http://localhost:8080/chat_room?user_id=john&channel_id=game_1`
 
 + `game_1` is room and `john` is user
 
